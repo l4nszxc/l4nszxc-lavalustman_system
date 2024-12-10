@@ -71,24 +71,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?=site_url('auth/register');?>">Register</a>
                 </li>
-                <?php else: ?>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?=html_escape(get_username(get_user_id()));?>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="userDropdown">
-                        <li>
-                            <a class="dropdown-item" href="<?=site_url('profile');?>">
-                                <i class="bi bi-person-circle me-2"></i>View Profile
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item text-danger" href="<?=site_url('auth/logout');?>">
-                                <i class="bi bi-box-arrow-right me-2"></i>Logout
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <?php endif; ?>
             </ul>

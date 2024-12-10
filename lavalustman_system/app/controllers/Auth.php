@@ -206,7 +206,7 @@ class Auth extends Controller {
                     ->name('re_password')
                         ->required()
                         ->min_length(8, 'Retype password must be at least 8 characters.')
-                        ->matches('password', 'Passwords did not match.');
+                            
                 if($this->form_validation->run()) {
                     if($this->lauth->reset_password_now($token, $password)) {
                         set_flash_alert('success', 'Password was successfully updated.');

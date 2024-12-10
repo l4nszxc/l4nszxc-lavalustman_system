@@ -19,5 +19,9 @@ class Home extends Controller {
         
         include APP_DIR . 'views/user/homepage.php';
     }
+
+    public function profile() {
+        $this->call->view('user-profile');
+    }
 }
 ?>

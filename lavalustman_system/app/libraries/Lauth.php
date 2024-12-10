@@ -187,7 +187,7 @@ class Lauth {
 	{
 		$row = $this->LAVA->db
 						->table('users')
-						->select('username')					
+						->select('username')
     					->where('id', $user_id)
     					->limit(1)
     					->get();
