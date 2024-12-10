@@ -93,5 +93,14 @@ class FlashcardsModel extends Model {
             return [];
         }
     }
+    public function save_quiz_result($data) {
+        return $this->db->table('quiz_results')->insert($data);
+    }
+    
+    public function get_quiz_result($user_id, $flashcard_id) {
+        $sql = "SELECT * FROM quiz_results WHERE user_id = ? AND flashcard_id = ? ORDER BY completed_at DESC LIMIT 1";
+        $stmt = $this->db->raw($sql, array($user_id, $flashcard_id));
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>

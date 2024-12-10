@@ -98,6 +98,19 @@ class FlashcardsController extends Controller {
         error_log("Items: " . print_r($items, true));
         include APP_DIR . 'views/user/view_flashcard.php';
     }
+    public function save_result() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'user_id' => get_user_id(),
+                'flashcard_id' => $_POST['flashcard_id'],
+                'score' => $_POST['score'],
+                'total_questions' => $_POST['total_questions']
+            ];
+            
+            $this->flashcardsModel->save_quiz_result($data);
+            echo json_encode(['success' => true]);
+        }
+    }
     
 }
 ?>
