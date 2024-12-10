@@ -8,6 +8,7 @@ class FlashcardsController extends Controller {
         parent::__construct();
         $this->flashcardsModel = new FlashcardsModel();
     }
+    
 
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -36,6 +37,7 @@ class FlashcardsController extends Controller {
         $items = $this->flashcardsModel->get_flashcard_items($id);
         include APP_DIR . 'views/user/edit_flashcard.php';
     }
+    
 
     public function update($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -88,7 +90,14 @@ class FlashcardsController extends Controller {
         $this->flashcardsModel->update_status($id, 'draft');
         redirect('flashcards/list');
     }
+    public function show($id) {
+        error_log("FlashcardsController::show called with ID: $id");
+        $flashcard = $this->flashcardsModel->get_flashcard($id);
+        $items = $this->flashcardsModel->get_flashcard_items($id);
+        error_log("Flashcard: " . print_r($flashcard, true));
+        error_log("Items: " . print_r($items, true));
+        include APP_DIR . 'views/user/view_flashcard.php';
+    }
+    
 }
 ?>
-
-

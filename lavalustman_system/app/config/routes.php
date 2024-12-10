@@ -62,4 +62,5 @@ $router->group('/flashcards', function() use ($router) {
     $router->get('/post/{num}', 'FlashcardsController::post');
     $router->get('/delete/{num}', 'FlashcardsController::delete');
     $router->get('/unpost/{num}', 'FlashcardsController::unpost');
+    $router->get('/show/{num}', 'FlashcardsController::show'); // Corrected route
 });

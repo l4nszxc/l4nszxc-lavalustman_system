@@ -12,11 +12,6 @@
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    cursor: pointer;
-}
-
-.flip-card.flipped {
-    transform: rotateY(180deg);
 }
 
 .flip-card-front, .flip-card-back {
@@ -71,54 +66,33 @@
                                 <h4 class="mb-0">Posted Flashcards</h4>
                             </div>
                             <div class="card-body">
-                                <?php
-                                // Debug output
-                                if (isset($posted_flashcards)) {
-                                    echo "<!-- Debug: Posted Flashcards Array: ";
-                                    var_dump($posted_flashcards);
-                                    echo " -->";
-                                }
-                                ?>
                                 <?php if (isset($posted_flashcards) && !empty($posted_flashcards)): ?>
                                     <div class="row">
                                         <?php foreach ($posted_flashcards as $flashcard): ?>
-                                            <?php 
-                                            // Debug output for each flashcard
-                                            echo "<!-- Processing flashcard: ";
-                                            var_dump($flashcard);
-                                            echo " -->";
-                                            ?>
-                                            <?php if (!empty($flashcard['items'])): ?>
-                                                <?php foreach ($flashcard['items'] as $index => $item): ?>
-                                                    <div class="col-md-6 col-lg-4">
-                                                        <div class="flip-card-container">
-                                                            <div class="flip-card">
-                                                                <div class="flip-card-front">
-                                                                    <span class="badge bg-primary category-badge"><?= htmlspecialchars($flashcard['category']) ?></span>
-                                                                    <h5 class="mb-3"><?= htmlspecialchars($flashcard['title']) ?></h5>
-                                                                    <p><?= htmlspecialchars($item['question']) ?></p>
-                                                                    <span class="card-count">Card <?= $index + 1 ?> of <?= count($flashcard['items']) ?></span>
-                                                                </div>
-                                                                <div class="flip-card-back">
-                                                                    <h5>Answer:</h5>
-                                                                    <p><?= htmlspecialchars($item['answer']) ?></p>
-                                                                    <small class="text-muted">Click to flip back</small>
-                                                                </div>
-                                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <a href="<?= site_url('flashcards/show/'.$flashcard['id']) ?>" class="text-decoration-none">
+                                                    <div class="flip-card">
+                                                        <div class="flip-card-front">
+                                                            <span class="badge bg-primary category-badge"><?= htmlspecialchars($flashcard['category']) ?></span>
+                                                            <h5 class="mb-3"><?= htmlspecialchars($flashcard['title']) ?></h5>
+                                                            <p><?= htmlspecialchars($flashcard['items'][0]['question']) ?></p>
+                                                            <span class="card-count">Card 1 of <?= count($flashcard['items']) ?></span>
+                                                        </div>
+                                                        <div class="flip-card-back">
+                                                            <h5>Answer:</h5>
+                                                            <p><?= htmlspecialchars($flashcard['items'][0]['answer']) ?></p>
+                                                            <small class="text-muted">Click to flip back</small>
                                                         </div>
                                                     </div>
-                                                    <?php endforeach; ?>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    <?php else: ?>
-                                        <div class="text-center py-5">
-                                            <p class="mb-0">No posted flashcards found.</p>
-                                            <small class="text-muted d-block mt-2">
-                                                Debug Info: <?php echo isset($posted_flashcards) ? 'Array is set but empty' : 'Array is not set'; ?>
-                                            </small>
-                                        </div>
-                                    <?php endif; ?>
+                                                </a>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="text-center py-5">
+                                        <p class="mb-0">No posted flashcards found.</p>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -128,12 +102,5 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('.flip-card').click(function() {
-            $(this).toggleClass('flipped');
-        });
-    });
-    </script>
 </body>
 </html>
