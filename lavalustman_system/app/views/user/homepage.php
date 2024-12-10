@@ -52,6 +52,15 @@
     font-size: 0.8rem;
     color: #6c757d;
 }
+.badge {
+    z-index: 1;
+}
+
+.completed-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
 </style>
 
 <body>
@@ -63,30 +72,38 @@
                     <div class="col-md-10">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="mb-0">Posted Flashcards</h4>
+                                <h4 class="mb-0">All Courses Flashcards</h4>
                             </div>
                             <div class="card-body">
                                 <?php if (isset($posted_flashcards) && !empty($posted_flashcards)): ?>
                                     <div class="row">
-                                        <?php foreach ($posted_flashcards as $flashcard): ?>
-                                            <div class="col-md-6 col-lg-4">
-                                                <a href="<?= site_url('flashcards/show/'.$flashcard['id']) ?>" class="text-decoration-none">
-                                                    <div class="flip-card">
-                                                        <div class="flip-card-front">
-                                                            <span class="badge bg-primary category-badge"><?= htmlspecialchars($flashcard['category']) ?></span>
-                                                            <h5 class="mb-3"><?= htmlspecialchars($flashcard['title']) ?></h5>
-                                                            <p><?= htmlspecialchars($flashcard['items'][0]['question']) ?></p>
-                                                            <span class="card-count">Card 1 of <?= count($flashcard['items']) ?></span>
-                                                        </div>
-                                                        <div class="flip-card-back">
-                                                            <h5>Answer:</h5>
-                                                            <p><?= htmlspecialchars($flashcard['items'][0]['answer']) ?></p>
-                                                            <small class="text-muted">Click to flip back</small>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        <?php endforeach; ?>
+                                    <?php foreach ($posted_flashcards as $flashcard): 
+    $completed = $this->flashcardsModel->has_user_completed(get_user_id(), $flashcard['id']);
+    $best_score = $completed ? $this->flashcardsModel->get_user_best_score(get_user_id(), $flashcard['id']) : null;
+?>
+    <div class="col-md-6 col-lg-4">
+        <a href="<?= site_url('flashcards/show/'.$flashcard['id']) ?>" class="text-decoration-none">
+            <div class="flip-card">
+                <div class="flip-card-front">
+                    <span class="badge bg-primary category-badge"><?= htmlspecialchars($flashcard['category']) ?></span>
+                    <?php if($completed): ?>
+                        <span class="badge bg-success position-absolute top-0 end-0 m-2">
+                            Completed (<?= $best_score['score'] ?>/<?= $best_score['total_questions'] ?>)
+                        </span>
+                    <?php endif; ?>
+                    <h5 class="mb-3"><?= htmlspecialchars($flashcard['title']) ?></h5>
+                    <p><?= htmlspecialchars($flashcard['items'][0]['question']) ?></p>
+                    <span class="card-count">Card 1 of <?= count($flashcard['items']) ?></span>
+                </div>
+                <div class="flip-card-back">
+                    <h5>Answer:</h5>
+                    <p><?= htmlspecialchars($flashcard['items'][0]['answer']) ?></p>
+                    <small class="text-muted">Click to flip back</small>
+                </div>
+            </div>
+        </a>
+    </div>
+<?php endforeach; ?>
                                     </div>
                                 <?php else: ?>
                                     <div class="text-center py-5">

@@ -102,5 +102,31 @@ class FlashcardsModel extends Model {
         $stmt = $this->db->raw($sql, array($user_id, $flashcard_id));
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function get_quiz_statistics($flashcard_id) {
+        $sql = "SELECT COUNT(DISTINCT user_id) as takers_count, 
+                AVG(score/total_questions * 100) as avg_score 
+                FROM quiz_results 
+                WHERE flashcard_id = ?";
+        $stmt = $this->db->raw($sql, array($flashcard_id));
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public function has_user_completed($user_id, $flashcard_id) {
+        $sql = "SELECT * FROM quiz_results 
+                WHERE user_id = ? AND flashcard_id = ? 
+                LIMIT 1";
+        $stmt = $this->db->raw($sql, array($user_id, $flashcard_id));
+        return $stmt->rowCount() > 0;
+    }
+    
+    public function get_user_best_score($user_id, $flashcard_id) {
+        $sql = "SELECT score, total_questions 
+                FROM quiz_results 
+                WHERE user_id = ? AND flashcard_id = ? 
+                ORDER BY (score/total_questions) DESC 
+                LIMIT 1";
+        $stmt = $this->db->raw($sql, array($user_id, $flashcard_id));
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>

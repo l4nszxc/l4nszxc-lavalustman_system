@@ -1,29 +1,51 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="<?=site_url();?>">
-            <span class="me-2">FlashCards Home</span>
-        </a>
         
-        <!-- Moved Courses here -->
+        <!-- Courses Dropdown with Home -->
         <?php if(logged_in()): ?>
         <div class="navbar-nav me-auto">
             <li class="nav-item dropdown">
-            <button class="btn dropdown-toggle d-flex align-items-center" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-book-half me-2"></i>Courses
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Soc Sci 114 - The Contemporary World</a></li>
-                <li><a class="dropdown-item" href="#">ITC 311 - Application Development and Emerging Technologies</a></li>
-                <li><a class="dropdown-item" href="#">ITP 311 - Networking 2</a></li>
-                <li><a class="dropdown-item" href="#">ITP 312 - IT Research Methods</a></li>
-                <li><a class="dropdown-item" href="#">ITP 313 - Event Driven Programming</a></li>
-                <li><a class="dropdown-item" href="#">ITP 314 - Systems Integration & Architecture 1</a></li>
-                <li><a class="dropdown-item" href="#">ITE 311 - Web Systems and Technologies 2</a></li>
-            </ul>
+                <button class="btn dropdown-toggle d-flex align-items-center" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-book-half me-2"></i>Courses
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="dropdown-item" href="<?=site_url();?>">
+                            <i class="bi bi-house-door me-2"></i>FlashCards Home
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">
+                        <i class="bi bi-book me-2"></i>Soc Sci 114 - The Contemporary World
+                    </a></li>
 
+                    <li><a class="dropdown-item" href="#">
+                        <i class="bi bi-laptop me-2"></i>ITC 311 - Application Development and Emerging Technologies
+                    </a></li>
+
+                    <li><a class="dropdown-item" href="#">
+                        <i class="bi bi-router me-2"></i>ITP 311 - Networking 2
+                    </a></li>
+
+                    <li><a class="dropdown-item" href="#">
+                        <i class="bi bi-journal-text me-2"></i>ITP 312 - IT Research Methods
+                    </a></li>
+
+                    <li><a class="dropdown-item" href="#">
+                        <i class="bi bi-code-slash me-2"></i>ITP 313 - Event Driven Programming
+                    </a></li>
+
+                    <li><a class="dropdown-item" href="#">
+                        <i class="bi bi-diagram-3 me-2"></i>ITP 314 - Systems Integration & Architecture 1
+                    </a></li>
+
+                    <li><a class="dropdown-item" href="#">
+                        <i class="bi bi-globe me-2"></i>ITE 311 - Web Systems and Technologies 2
+                    </a></li>         
+                </ul>
             </li>
-            <li class="nav-item  ">
-                <a class="nav-link " href="<?=site_url('flashcards/create');?>">
+            <li class="nav-item">
+                <a class="nav-link" href="<?=site_url('flashcards/create');?>">
                     <i class="bi bi-plus-circle me-2"></i>Create Flashcards
                 </a>
             </li>
