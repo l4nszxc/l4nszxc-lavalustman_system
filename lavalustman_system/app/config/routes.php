@@ -54,3 +54,12 @@ $router->group('/auth', function() use ($router){
     $router->match('/password-reset', 'Auth::password_reset', ['POST', 'GET']);
     $router->match('/set-new-password', 'Auth::set_new_password', ['POST', 'GET']);
 });
+$router->group('/flashcards', function() use ($router) {
+    $router->match('/create', 'FlashcardsController::create', ['POST', 'GET']);
+    $router->get('/list', 'FlashcardsController::list');
+    $router->get('/edit/{num}', 'FlashcardsController::edit');
+    $router->post('/update/{num}', 'FlashcardsController::update');
+    $router->get('/post/{num}', 'FlashcardsController::post');
+    $router->get('/delete/{num}', 'FlashcardsController::delete');
+    $router->get('/unpost/{num}', 'FlashcardsController::unpost');
+});
