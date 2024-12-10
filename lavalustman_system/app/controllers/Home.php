@@ -14,5 +14,9 @@ class Home extends Controller {
 	public function index() {
         $this->call->view('homepage');
     }
+
+    public function profile() {
+        $this->call->view('user-profile');
+    }
 }
 ?>

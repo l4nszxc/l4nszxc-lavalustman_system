@@ -23,7 +23,7 @@
                 </li>
                 <?php endif; ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><?=html_escape(get_username(get_user_id()));?></a>
+                    <a class="nav-link" href="<?=site_url('user-profile');?>"><?=html_escape(get_username(get_user_id()));?></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?=site_url('auth/logout');?>">Logout</a>
