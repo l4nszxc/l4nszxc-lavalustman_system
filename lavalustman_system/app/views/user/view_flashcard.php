@@ -8,7 +8,7 @@
 .flip-card {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 300px;
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
@@ -57,6 +57,33 @@
     justify-content: space-between;
     margin-top: 20px;
 }
+
+.option {
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.option.selected-correct {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+.option.selected-incorrect {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.option.show-correct {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
 </style>
 <body>
     <div id="app">
@@ -73,17 +100,33 @@
                                 <div id="flashcardCarousel" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
                                         <?php foreach ($items as $index => $item): ?>
+                                            <?php
+                                            // Generate random options
+                                            $options = [
+                                                'A' => $item['answer'],
+                                                'B' => 'Option B',
+                                                'C' => 'Option C',
+                                                'D' => 'Option D'
+                                            ];
+                                            shuffle($options);
+                                            ?>
                                             <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
                                                 <div class="flip-card-container">
                                                     <div class="flip-card">
                                                         <div class="flip-card-front">
                                                             <h5 class="mb-3"><?= htmlspecialchars($item['question']) ?></h5>
+                                                            <div class="options">
+                                                                <?php foreach ($options as $key => $option): ?>
+                                                                    <div class="option" data-answer="<?= $option ?>" data-correct="<?= $option === $item['answer'] ? 'true' : 'false' ?>">
+                                                                        <?= $key ?>. <?= htmlspecialchars($option) ?>
+                                                                    </div>
+                                                                <?php endforeach; ?>
+                                                            </div>
                                                             <span class="card-count">Card <?= $index + 1 ?> of <?= count($items) ?></span>
                                                         </div>
                                                         <div class="flip-card-back">
                                                             <h5>Answer:</h5>
                                                             <p><?= htmlspecialchars($item['answer']) ?></p>
-                                                            <small class="text-muted">Click to flip back</small>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,7 +137,7 @@
                                         <button class="btn btn-primary" type="button" data-bs-target="#flashcardCarousel" data-bs-slide="prev">
                                             Previous
                                         </button>
-                                        <button class="btn btn-primary" type="button" data-bs-target="#flashcardCarousel" data-bs-slide="next">
+                                        <button class="btn btn-primary next-btn" type="button" data-bs-target="#flashcardCarousel" data-bs-slide="next" disabled>
                                             Next
                                         </button>
                                     </div>
@@ -112,10 +155,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
     $(document).ready(function() {
-        $('.flip-card').click(function() {
-            $(this).toggleClass('flipped');
-        });
+    $('.option').click(function() {
+        var selectedOption = $(this);
+        var isCorrect = selectedOption.data('correct') === 'true';
+        var optionsContainer = selectedOption.closest('.options');
+
+        // Remove any previous highlighting
+        optionsContainer.find('.option').removeClass('selected-correct selected-incorrect show-correct');
+
+        if (isCorrect) {
+            // If correct answer selected, highlight it green
+            selectedOption.addClass('selected-correct');
+        } else {
+            // If incorrect answer selected, highlight it red and show correct answer in green
+            selectedOption.addClass('selected-incorrect');
+            optionsContainer.find('.option[data-correct="true"]').addClass('show-correct');
+        }
+
+        // Flip the card
+        selectedOption.closest('.flip-card').addClass('flipped');
+
+        // Disable all options after selection
+        optionsContainer.find('.option').css('pointer-events', 'none');
+        
+        // Enable next button
+        $('.next-btn').prop('disabled', false);
     });
+
+    // Reset options when moving to next/previous card
+    $('#flashcardCarousel').on('slide.bs.carousel', function () {
+        $('.option').removeClass('selected-correct selected-incorrect show-correct').css('pointer-events', 'auto');
+        $('.flip-card').removeClass('flipped');
+        $('.next-btn').prop('disabled', true);
+    });
+});
     </script>
 </body>
 </html>
