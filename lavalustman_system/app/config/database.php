@@ -63,7 +63,7 @@ $database['main'] = array(
     'port'		=> '3306',
     'username'	=> 'root',
     'password'	=> '',
-    'database'	=> 'lavalustman_system',
+    'database'	=> 'lavaemail',
     'charset'	=> 'utf8mb4',
     'dbprefix'	=> '',
 );

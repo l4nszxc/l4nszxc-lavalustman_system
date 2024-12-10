@@ -12,7 +12,7 @@ class Home extends Controller {
     }
 
 	public function index() {
-        $this->call->view('homepage');
+        $this->call->view('user/homepage');
     }
 }
 ?>
