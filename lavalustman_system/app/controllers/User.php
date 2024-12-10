@@ -13,6 +13,15 @@ public function index() {
 
     $this->call->view('user/user-profile', ['user' => $user]);
 }
+public function profile() {
+    if (!logged_in()) {
+        redirect('auth/login');
+    }
+    
+    $user_id = get_user_id();
+    $user = $this->userModel->getUser($user_id);
+    include APP_DIR . 'views/user/user-profile.php';
+}
 
 public function updatePhoneNumber()
     {
