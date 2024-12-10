@@ -11,15 +11,16 @@
             <button class="btn dropdown-toggle d-flex align-items-center" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-book-half me-2"></i>Courses
             </button>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-book me-2"></i> - The Contemporary World</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-laptop me-2"></i> - Application Development and Emerging Technologies</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-router me-2"></i> - Networking 2</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-journal-text me-2"></i> - IT Research Methods</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-code-slash me-2"></i> - Event Driven Programming</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-diagram-3 me-2"></i> - Systems Integration & Architecture 1</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-globe me-2"></i> - Web Systems and Technologies 2</a></li>
-                </ul>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Soc Sci 114 - The Contemporary World</a></li>
+                <li><a class="dropdown-item" href="#">ITC 311 - Application Development and Emerging Technologies</a></li>
+                <li><a class="dropdown-item" href="#">ITP 311 - Networking 2</a></li>
+                <li><a class="dropdown-item" href="#">ITP 312 - IT Research Methods</a></li>
+                <li><a class="dropdown-item" href="#">ITP 313 - Event Driven Programming</a></li>
+                <li><a class="dropdown-item" href="#">ITP 314 - Systems Integration & Architecture 1</a></li>
+                <li><a class="dropdown-item" href="#">ITE 311 - Web Systems and Technologies 2</a></li>
+            </ul>
+
             </li>
             <li class="nav-item  ">
                 <a class="nav-link " href="<?=site_url('flashcards/create');?>">
