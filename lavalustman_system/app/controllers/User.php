@@ -78,6 +78,33 @@ public function updatePhoneNumber()
         $this->call->view('user/user-profile', ['user' => $user]);
     }
 
+    public function updateUsername() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $userId = $_SESSION['user_id'] ?? null;
+            $newUsername = $this->io->post('username');
+
+            // Validate the new phone number
+            $this->form_validation->name('username')
+                ->required();
+
+            if ($this->form_validation->run()) {
+                // Call the model function to update the phone number
+                $username = $this->userModel->updateUsername($userId, $newUsername);
+                if ($username) {
+                    $this->session->set_flashdata(['alert' => 'Username updated successfully']);
+                } else {
+                    $this->session->set_flashdata(['alert' => 'Oh no']);
+                }
+            } else {
+                set_flash_alert('danger', $this->form_validation->errors());
+            }
+        }
+
+        // Redirect or load the view for updating phone number
+        $user = $this->userModel->getUser();
+        $this->call->view('user/user-profile', ['user' => $user]);
+    }
+
     public function updateGender() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $userId = $_SESSION['user_id'] ?? null;
@@ -92,6 +119,36 @@ public function updatePhoneNumber()
                 $gender = $this->userModel->updateGender($userId, $newGender);
                 if ($gender) {
                     $this->session->set_flashdata(['alert' => 'Gender updated successfully']);
+                } else {
+                    $this->session->set_flashdata(['alert' => 'Oh no']);
+                }
+            } else {
+                set_flash_alert('danger', $this->form_validation->errors());
+            }
+        }
+
+        // Redirect or load the view for updating phone number
+        $user = $this->userModel->getUser();
+        $this->call->view('user/user-profile', ['user' => $user]);
+    }
+
+    public function updateName() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $userId = $_SESSION['user_id'] ?? null;
+            $newFirst = $this->io->post('firstname');
+            $newLast = $this->io->post('lastname');
+
+            // Validate the new phone number
+            $this->form_validation->name('firstname')
+                ->required();
+                $this->form_validation->name('lastname')
+                ->required();
+
+            if ($this->form_validation->run()) {
+                // Call the model function to update the phone number
+                $name = $this->userModel->updateName($userId, $newFirst, $newLast);
+                if ($name) {
+                    $this->session->set_flashdata(['alert' => 'Name updated successfully']);
                 } else {
                     $this->session->set_flashdata(['alert' => 'Oh no']);
                 }

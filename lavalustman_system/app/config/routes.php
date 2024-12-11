@@ -51,6 +51,8 @@ $router->post('/update-address', 'User::updateAddress');
 $router->post('/update-gender', 'User::updateGender');
 $router->post('/update-bday', 'User::updateBDAY');
 $router->post('/update-role', 'User::updateRole');
+$router->post('/update-username', 'User::updateUsername');
+$router->post('/update-name', 'User::updateName');
 $router->post('/update-password', 'User::updatePassword');
 
 $router->group('/auth', function() use ($router){

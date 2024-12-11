@@ -91,17 +91,21 @@ include APP_DIR.'views/templates/nav.php';
 <div class="profile-container">
     <?php if (!empty($user)): ?>
         <?php foreach ($user as $users): ?>
-        <div class="profile-header">
-            <h2>
-                <a data-toggle="modal" data-target="#editNameModal" style="text-decoration: none; color: inherit;">
-                    <?= htmlspecialchars($users['firstname'] ?? 'Set first name') ?> <?= htmlspecialchars($users['lastname'] ?? 'Set last name') ?>
-                </a>
-            </h2>
-        </div>
+        
+        <a class="profile-info" data-toggle="modal" data-target="#editNameModal">
+            <h4>Fullname:</h4>
+            <p><?= htmlspecialchars($users['firstname'] ?? ' ') ?> <?= htmlspecialchars($users['lastname'] ?? ' ') ?></p>
+            <button type="button" class="btn-edit">></button>
+        </a>
         <div class="profile-info">
             <h4>Email:</h4>
             <p><?= htmlspecialchars($users['email'] ?? 'Set email') ?></p>
         </div>
+        <a class="profile-info" data-toggle="modal" data-target="#editUsernameModal">
+            <h4>Username:</h4>
+            <p><?= htmlspecialchars($users['username'] ?? 'Set username') ?></p>
+            <button type="button" class="btn-edit">></button>
+        </a>
         <a class="profile-info" data-toggle="modal" data-target="#editPhoneModal">
             <h4>Phone:</h4>
             <p><?= htmlspecialchars($users['phone'] ?? 'Set phone') ?></p>
@@ -144,7 +148,7 @@ include APP_DIR.'views/templates/nav.php';
         <h4 id="actionan">Update Password</h4>
         <button type="button"  class="btn-edit">></button>
     </a>
-    <a href="<?=site_url('auth/logout');?>" class="profile-info">
+    <a href="<?=site_url('auth/logout');?>" class="profile-info" onclick="return confirm('Are you sure you want to logout?');">
         <h4>Logout</h4>
     </a>
 </div>
@@ -177,10 +181,8 @@ include APP_DIR.'views/templates/nav.php';
     </div>
 </div>
 
-
-
 <!-- Edit Name Modal -->
-<div class="modal fade" id="editNameModal" tabindex="-1" role="dialog" aria-labelledby="editNameModal Label" aria-hidden="true">
+<div class="modal fade" id="editNameModal" tabindex="-1" role="dialog" aria-labelledby="editNameModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -190,7 +192,7 @@ include APP_DIR.'views/templates/nav.php';
                 </button>
             </div>
             <div class="modal-body">
-                <form action="update_name.php" method="POST">
+            <form method="POST" action="<?=site_url('update-name');?>">
                     <div class="form-group">
                         <label for="modal-firstname">First Name</label>
                         <input type="text" class="form-control" id="modal-firstname" name="firstname" value="<?= htmlspecialchars($users['firstname'] ?? '') ?>" required>
@@ -252,6 +254,28 @@ include APP_DIR.'views/templates/nav.php';
     </div>
 </div>
 
+<div class="modal fade" id="editUsernameModal" tabindex="-1" role="dialog" aria-labelledby="editUsernameModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUsernameModalLabel">Edit Username</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form method="POST" action="<?=site_url('update-username');?>">
+                    <div class="form-group">
+                        <label for="modal-address">Username</label>
+                        <input type="text" class="form-control" id="modal-address" name="username" value="<?= htmlspecialchars($users['username'] ?? '') ?>" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Edit Gender Modal -->
 <div class="modal fade" id="editGenderModal" tabindex="-1" role="dialog" aria-labelledby="editGenderModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -268,7 +292,7 @@ include APP_DIR.'views/templates/nav.php';
                         <label for="modal-gender">Gender</label>
                         <select class="form-control" id="modal-gender" name="gender" required>
                             <option value="Male" <?= ($users['gender'] == 'Male') ? 'selected' : '' ?>>Male</option>
-                            <option value="Female" <?= ($users['gender'] == ' Female') ? 'selected' : '' ?>>Female</option>
+                            <option value="Female" <?= ($users['gender'] == 'Female') ? 'selected' : '' ?>>Female</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>

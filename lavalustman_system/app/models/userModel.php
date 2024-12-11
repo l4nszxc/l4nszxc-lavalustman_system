@@ -10,7 +10,7 @@ public function passwordhash($new) {
 public function getUser() {
     $userId = $_SESSION['user_id'] ?? null;
     return $this->db->table('users')
-        ->select('firstname, lastname, email, gender, created_at, phone, address, dob, class')
+        ->select('firstname, username, lastname, email, gender, created_at, phone, address, dob, class')
         ->where(['id' => $userId])
         ->get_all();
 }
@@ -33,6 +33,17 @@ public function updatePhoneNumber($userId, $newPhone)
        
     }
 
+    public function updateName($userId, $newFirst, $newLast)
+    {
+        $data = array('firstname' => $newFirst, 'lastname' => $newLast);
+            return $this->db->table('users')
+                            ->where(['id' => $userId])
+                            ->update($data);
+       
+    }   
+    
+   
+
     public function updateGender($userId, $newGender)
     {
         $data = array('gender' => $newGender);
@@ -54,6 +65,15 @@ public function updatePhoneNumber($userId, $newPhone)
     public function updateRole($userId, $newRole)
     {
         $data = array('class' => $newRole);
+            return $this->db->table('users')
+                            ->where(['id' => $userId])
+                            ->update($data);
+       
+    }
+
+    public function updateUsername($userId, $newUsername)
+    {
+        $data = array('username' => $newUsername);
             return $this->db->table('users')
                             ->where(['id' => $userId])
                             ->update($data);
