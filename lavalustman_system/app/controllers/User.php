@@ -17,10 +17,9 @@ public function profile() {
     if (!logged_in()) {
         redirect('auth/login');
     }
-    
-    $user_id = get_user_id();
-    $user = $this->userModel->getUser($user_id);
-    include APP_DIR . 'views/user/user-profile.php';
+
+    $user = $this->userModel->getUser();
+    $this->call->view('user/user-profile', ['user' => $user]);
 }
 
 public function updatePhoneNumber()
@@ -218,41 +217,51 @@ public function updatePhoneNumber()
 
     public function updatePassword() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $userId = $_SESSION['user_id'] ?? null;
-            $new = $this->io->post('new_password');
-            $confirm = $this->io->post('confirm_password');
-
-            // Validate the new phone number
+            $userId = get_user_id();
+            $currentPassword = $this->io->post('current_password');
+            $newPassword = $this->io->post('new_password');
+            $confirmPassword = $this->io->post('confirm_password');
+    
+            // Validate the new password
             $this->form_validation->name('new_password')
                 ->required()
-                ->min_length(8, 'Retype password must be at least 8 characters.');
+                ->min_length(8, 'New password must be at least 8 characters.');
             $this->form_validation->name('confirm_password')
                 ->required()
-                ->min_length(8, 'Retype password must be at least 8 characters.')
                 ->matches('new_password', 'Passwords did not match.');
-
+    
             if ($this->form_validation->run()) {
-                // Call the model function to update the phone number
-                $password = $this->userModel->updatePassword($userId, $new);
-                if ($password) {
-                    $this->session->set_flashdata(['alert' => 'Password updated successfully']);
+                // Verify current password
+                $user = $this->userModel->getUserById($userId);
+                if (password_verify($currentPassword, $user['password'])) {
+                    // Update the password
+                    $this->userModel->updatePassword($userId, $newPassword);
+                    set_flash_alert('success', 'Password updated successfully.');
                 } else {
-                    $this->session->set_flashdata(['alert' => 'Oh no']);
+                    set_flash_alert('danger', 'Current password is incorrect.');
                 }
             } else {
                 set_flash_alert('danger', $this->form_validation->errors());
             }
         }
-
-        // Redirect or load the view for updating phone number
+    
+        // Redirect or load the view for updating password
         $user = $this->userModel->getUser();
         $this->call->view('user/user-profile', ['user' => $user]);
     }
-
+    public function verifyPassword() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $userId = get_user_id();
+            $currentPassword = $this->io->post('current_password');
     
+            // Verify current password
+            $user = $this->userModel->getUserById($userId);
+            if (password_verify($currentPassword, $user['password'])) {
+                echo 'verified';
+            } else {
+                echo 'incorrect';
+            }
+        }
+    }
 }
-
-
-    
-
 ?>

@@ -89,6 +89,12 @@ public function updatePhoneNumber($userId, $newPhone)
             ->where(['id' => $userId])
             ->update($data);
     }
+    public function getUserById($userId) {
+        return $this->db->table('users')
+            ->select('id, firstname, lastname, email, gender, created_at, phone, address, dob, class, password')
+            ->where(['id' => $userId])
+            ->get();
+    }
 }
 
 

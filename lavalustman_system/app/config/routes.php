@@ -54,6 +54,7 @@ $router->post('/update-role', 'User::updateRole');
 $router->post('/update-username', 'User::updateUsername');
 $router->post('/update-name', 'User::updateName');
 $router->post('/update-password', 'User::updatePassword');
+$router->post('/verify-password', 'User::verifyPassword');
 
 $router->group('/auth', function() use ($router){
     $router->match('/register', 'Auth::register', ['POST', 'GET']);
