@@ -91,6 +91,16 @@ include APP_DIR.'views/templates/nav.php';
             <h4>Email:</h4>
             <p><?= htmlspecialchars($users['email'] ?? 'Set email') ?></p>
         </div>
+        <a class="profile-info" data-toggle="modal" data-target="#editNameModal">
+            <h4>Fullname:</h4>
+            <p><?= htmlspecialchars($users['firstname'] ?? ' ') ?> <?= htmlspecialchars($users['lastname'] ?? ' ') ?></p>
+            <button type="button" class="btn-edit">></button>
+        </a>
+        <a class="profile-info" data-toggle="modal" data-target="#editUsernameModal">
+            <h4>Username:</h4>
+            <p><?= htmlspecialchars($users['username'] ?? 'Set username') ?></p>
+            <button type="button" class="btn-edit">></button>
+        </a>
         <a class="profile-info" data-toggle="modal" data-target="#editPhoneModal">
             <h4>Phone:</h4>
             <p><?= htmlspecialchars($users['phone'] ?? 'Set phone') ?></p>
@@ -181,7 +191,6 @@ include APP_DIR.'views/templates/nav.php';
     </div>
 </div>
 
-<!-- Edit Name Modal -->
 <div class="modal fade" id="editNameModal" tabindex="-1" role="dialog" aria-labelledby="editNameModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -192,7 +201,7 @@ include APP_DIR.'views/templates/nav.php';
                 </button>
             </div>
             <div class="modal-body">
-                <form action="update_name.php" method="POST">
+            <form method="POST" action="<?=site_url('update-name');?>">
                     <div class="form-group">
                         <label for="modal-firstname">First Name</label>
                         <input type="text" class="form-control" id="modal-firstname" name="firstname" value="<?= htmlspecialchars($users['firstname'] ?? '') ?>" required>
@@ -207,7 +216,27 @@ include APP_DIR.'views/templates/nav.php';
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="editUsernameModal" tabindex="-1" role="dialog" aria-labelledby="editUsernameModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUsernameModalLabel">Edit Username</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form method="POST" action="<?=site_url('update-username');?>">
+                    <div class="form-group">
+                        <label for="modal-address">Username</label>
+                        <input type="text" class="form-control" id="modal-address" name="username" value="<?= htmlspecialchars($users['username'] ?? '') ?>" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Edit Phone Modal -->
 <div class="modal fade" id="editPhoneModal" tabindex="-1" role="dialog" aria-labelledby="editPhoneModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
