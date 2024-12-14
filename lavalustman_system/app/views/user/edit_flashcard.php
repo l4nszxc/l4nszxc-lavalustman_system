@@ -1,4 +1,202 @@
 <?php include APP_DIR.'views/templates/header.php'; ?>
+<style>
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+    }
+    
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        border-radius: 15px 15px 0 0 !important;
+        border: none;
+        padding: 1rem 1.5rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .form-control, .form-select {
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        border: 2px solid #e9ecef;
+        transition: all 0.3s;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: #1e3c72;
+        box-shadow: 0 0 0 0.2rem rgba(30, 60, 114, 0.15);
+    }
+    
+    textarea.form-control {
+        min-height: 100px;
+        resize: vertical;
+    }
+    
+    .btn {
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        border: none;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+    }
+    
+    .btn-danger {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        border: none;
+    }
+    
+    .btn-danger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+    }
+    
+    .btn-success {
+        background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+        border: none;
+    }
+    
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+    
+    .badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+    }
+    
+    label {
+        color: #1e3c72;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 15px;
+        }
+
+        .card {
+            margin-bottom: 1rem;
+        }
+
+        .card-header {
+            padding: 1rem;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+
+        .card-header .d-flex {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card-header .btn-group {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-control, .form-select {
+            font-size: 0.9rem;
+            padding: 0.5rem;
+        }
+
+        textarea.form-control {
+            min-height: 80px;
+        }
+
+        label {
+            font-size: 0.9rem;
+        }
+
+        .badge {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        h5 {
+            font-size: 1.1rem;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        #flipCount {
+            width: 100% !important;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-sm {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-header .d-flex.justify-content-between {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card-header .d-flex.align-items-center {
+            justify-content: center;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .col-md-8 {
+            padding: 0;
+        }
+
+        .card {
+            border-radius: 0;
+        }
+
+        .mt-3 {
+            margin-top: 0 !important;
+        }
+
+        .pt-3 {
+            padding-top: 0 !important;
+        }
+    }
+</style>
 <body>
     <div id="app">
         <?php include APP_DIR.'views/templates/nav.php'; ?>  
