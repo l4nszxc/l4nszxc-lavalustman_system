@@ -1,4 +1,71 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<style>
+    .navbar {
+        padding: 1rem 0;
+        background: linear-gradient(135deg, #1e3c72 0%, #1e3c72) !important;
+    }
+    .navbar-brand {
+        color: #fff !important;
+        font-weight: 600;
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+    .navbar-brand:hover {
+        transform: translateY(-2px);
+    }
+    .nav-link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500;
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+        color: #fff !important;
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+    }
+    .navbar-toggler {
+        border: none;
+        padding: 0.5rem;
+    }
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    }
+    .dropdown-menu {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        padding: 0.5rem;
+        min-width: 200px;
+    }
+    .dropdown-item {
+        padding: 0.7rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+        transform: translateX(5px);
+    }
+    .dropdown-divider {
+        margin: 0.5rem 0;
+    }
+    .text-danger {
+        color: #dc3545 !important;
+    }
+    @media (max-width: 768px) {
+        .navbar-collapse {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        .nav-link {
+            padding: 0.7rem 1rem !important;
+        }
+    }
+</style>
+<nav class="navbar navbar-expand-md shadow-sm">    
     <div class="container">
         <a class="navbar-brand" href="<?=site_url();?>">
             FlashCards.buzz

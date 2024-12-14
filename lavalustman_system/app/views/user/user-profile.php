@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -14,8 +15,8 @@
             margin: 50px auto;
             padding: 30px;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         .profile-header {
             text-align: center;
@@ -34,6 +35,12 @@
             font-size: 1.1rem;
             color: #495057;
             width: 40%;
+            display: flex;
+            align-items: center;
+        }
+        .profile-info h4 i {
+            margin-right: 10px;
+            color: #1e3c72;
         }
         .profile-info p {
             margin: 0;
@@ -59,14 +66,55 @@
             margin: 50px auto;
             padding: 30px;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         .action-card h4 {
             margin-bottom: 20px;
         }
         .action-card a {
             text-decoration: none;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .modal-content {
+            border-radius: 15px;
+        }
+        .modal-footer {
+            border-top: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+        .logout-link {
+        color: #dc3545 !important;
+        display: flex;
+        }
+        
+        .logout-link h4 {
+            color: #dc3545 !important;
+            margin: 0;
+        }
+        
+        .logout-link h4 i {
+            color: #dc3545 !important;
+            margin-right: 10px;
+        }
+        
+        .logout-link:hover {
+            background-color: rgba(220, 53, 69, 0.1);
+            transition: all 0.3s ease;
         }
     </style>
 </head>
@@ -88,46 +136,46 @@ include APP_DIR.'views/templates/nav.php';
             </h2>
         </div>
         <div class="profile-info">
-            <h4>Email:</h4>
+            <h4><i class="bi bi-envelope"></i>Email:</h4>
             <p><?= htmlspecialchars($users['email'] ?? 'Set email') ?></p>
         </div>
         <a class="profile-info" data-toggle="modal" data-target="#editNameModal">
-            <h4>Fullname:</h4>
+            <h4><i class="bi bi-person"></i>Fullname:</h4>
             <p><?= htmlspecialchars($users['firstname'] ?? ' ') ?> <?= htmlspecialchars($users['lastname'] ?? ' ') ?></p>
-            <button type="button" class="btn-edit">></button>
+            <button type="button" class="btn-edit"><i class="bi bi-pencil"></i></button>
         </a>
         <a class="profile-info" data-toggle="modal" data-target="#editUsernameModal">
-            <h4>Username:</h4>
+            <h4><i class="bi bi-person-badge"></i>Username:</h4>
             <p><?= htmlspecialchars($users['username'] ?? 'Set username') ?></p>
-            <button type="button" class="btn-edit">></button>
+            <button type="button" class="btn-edit"><i class="bi bi-pencil"></i></button>
         </a>
         <a class="profile-info" data-toggle="modal" data-target="#editPhoneModal">
-            <h4>Phone:</h4>
+            <h4><i class="bi bi-telephone"></i>Phone:</h4>
             <p><?= htmlspecialchars($users['phone'] ?? 'Set phone') ?></p>
-            <button type="button" class="btn-edit">></button>
+            <button type="button" class="btn-edit"><i class="bi bi-pencil"></i></button>
         </a>
         <a class="profile-info" data-toggle="modal" data-target="#editAddressModal">
-            <h4>Address:</h4>
+            <h4><i class="bi bi-geo-alt"></i>Address:</h4>
             <p><?= htmlspecialchars($users['address'] ?? 'Set address') ?></p>
-            <button type="button" class="btn-edit">></button>
+            <button type="button" class="btn-edit"><i class="bi bi-pencil"></i></button>
         </a>
         <a class="profile-info" data-toggle="modal" data-target="#editGenderModal">
-            <h4>Gender:</h4>
+            <h4><i class="bi bi-gender-ambiguous"></i>Gender:</h4>
             <p><?= htmlspecialchars($users['gender'] ?? 'Set gender') ?></p>
-            <button type="button" class="btn-edit">></button>
+            <button type="button" class="btn-edit"><i class="bi bi-pencil"></i></button>
         </a>
         <a class="profile-info" data-toggle="modal" data-target="#editDobModal">
-            <h4>Birthdate:</h4>
+            <h4><i class="bi bi-calendar"></i>Birthdate:</h4>
             <p><?= htmlspecialchars($users['dob'] ?? 'Set birthdate') ?></p>
-            <button type="button" class="btn-edit">></button>
+            <button type="button" class="btn-edit"><i class="bi bi-pencil"></i></button>
         </a>
         <div class="profile-info" data-toggle="modal" data-target="#editRoleModal">
-            <h4>Role:</h4>
+            <h4><i class="bi bi-briefcase"></i>Role:</h4>
             <p><?= htmlspecialchars($users['class']) ?></p>
-            <button type="button" class="btn-edit">></button>
+            <button type="button" class="btn-edit"><i class="bi bi-pencil"></i></button>
         </div>
         <div class="profile-info">
-            <h4>Joined:</h4>
+            <h4><i class="bi bi-calendar-check"></i>Joined:</h4>
             <p><?= htmlspecialchars($users['created_at']) ?></p>
         </div>
         <?php endforeach; ?>
@@ -140,11 +188,11 @@ include APP_DIR.'views/templates/nav.php';
 <div class="action-card">
     <h4>Account Actions</h4>
     <a class="profile-info"  data-toggle="modal" data-target="#updatePasswordModal">
-        <h4 id="actionan">Update Password</h4>
-        <button type="button"  class="btn-edit">></button>
+        <h4 id="actionan"><i class="bi bi-key"></i>Update Password</h4>
+        <button type="button"  class="btn-edit"><i class="bi bi-pencil"></i></button>
     </a>
-    <a href="<?=site_url('auth/logout');?>" class="profile-info" onclick="return confirm('Are you sure you want to logout?');">
-        <h4>Logout</h4>
+    <a href="<?=site_url('auth/logout');?>" class="profile-info logout-link" onclick="return confirm('Are you sure you want to logout?');">
+        <h4><i class="bi bi-box-arrow-right"></i>Logout</h4>
     </a>
 </div>
 

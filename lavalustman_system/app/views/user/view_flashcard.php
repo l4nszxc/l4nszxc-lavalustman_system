@@ -1,104 +1,166 @@
 <?php include APP_DIR.'views/templates/header.php'; ?>
 <style>
-.flip-card-container {
-    perspective: 1000px;
-    margin-bottom: 20px;
-}
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+    }
 
-.flip-card {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    cursor: pointer;
-}
+    .card-header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        border-radius: 15px 15px 0 0 !important;
+        padding: 1.5rem;
+        border: none;
+    }
 
-.flip-card.flipped {
-    transform: rotateY(180deg);
-}
+    .flip-card-container {
+        perspective: 1000px;
+        margin: 20px auto;
+        max-width: 700px;
+    }
 
-.flip-card-front, .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 15px;
-}
+    .flip-card {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+    }
 
-.flip-card-front {
-    background-color: #fff;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: 0.25rem;
-}
+    .flip-card.flipped {
+        transform: rotateY(180deg);
+    }
 
-.flip-card-back {
-    background-color: #f8f9fa;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: 0.25rem;
-    transform: rotateY(180deg);
-}
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
 
-.option {
-    margin: 8px 0;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+    .flip-card-front {
+        background: white;
+    }
 
-.option:hover {
-    background-color: #f8f9fa;
-}
+    .flip-card-back {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        transform: rotateY(180deg);
+    }
 
-.option.selected-correct {
-    background-color: #28a745 !important;
-    border-color: #28a745 !important;
-    color: white !important;
-}
+    .option {
+        margin: 10px 0;
+        padding: 15px 20px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+        text-align: left;
+        position: relative;
+        overflow: hidden;
+    }
 
-.option.selected-incorrect {
-    background-color: #dc3545 !important;
-    border-color: #dc3545 !important;
-    color: white !important;
-}
+    .option:hover {
+        transform: translateX(5px);
+        background-color: #f8f9fa;
+        border-color: #1e3c72;
+    }
 
-.option.show-correct {
-    background-color: #28a745 !important;
-    border-color: #28a745 !important;
-    color: white !important;
-}
+    .option.selected-correct {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        border-color: transparent;
+        color: white;
+        transform: scale(1.02);
+    }
 
-.card-count {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 0.8rem;
-    color: #6c757d;
-}
+    .option.selected-incorrect {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        border-color: transparent;
+        color: white;
+    }
 
-.navigation-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
+    .option.show-correct {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        border-color: transparent;
+        color: white;
+    }
 
-.modal-score {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 1rem 0;
-}
+    .navigation-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 30px 0;
+    }
 
-.modal-percentage {
-    font-size: 1.5rem;
-    color: #6c757d;
-}
+    .btn-primary {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        border: none;
+        padding: 10px 25px;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        border: none;
+    }
+
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+    }
+
+    .modal-header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        border-radius: 15px 15px 0 0;
+        border: none;
+    }
+
+    .modal-score {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #1e3c72;
+        margin: 1.5rem 0;
+    }
+
+    .modal-percentage {
+        font-size: 1.8rem;
+        color: #6c757d;
+    }
+
+    @media (max-width: 768px) {
+        .flip-card {
+            height: 450px;
+        }
+        
+        .option {
+            font-size: 1rem;
+            padding: 12px 15px;
+        }
+        
+        .card-header h4 {
+            font-size: 1.2rem;
+        }
+    }
 </style>
 
 <body>
