@@ -4,12 +4,12 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 class User extends Controller {
     public function __construct() {
     parent::__construct();
-    $this->call->model('userModel');
+    $this->call->model('Usermodel');
 }
 
 public function index() {
-    $this->call->model('userModel');
-    $user = $this->userModel->getUser();
+    $this->call->model('Usermodel');
+    $user = $this->Usermodel->getUser();
 
     $this->call->view('user/user-profile', ['user' => $user]);
 }
@@ -18,7 +18,7 @@ public function profile() {
         redirect('auth/login');
     }
 
-    $user = $this->userModel->getUser();
+    $user = $this->Usermodel->getUser();
     $this->call->view('user/user-profile', ['user' => $user]);
 }
 
@@ -34,7 +34,7 @@ public function updatePhoneNumber()
 
             if ($this->form_validation->run()) {
                 // Call the model function to update the phone number
-                $phone = $this->userModel->updatePhoneNumber($userId, $newPhoneNumber);
+                $phone = $this->Usermodel->updatePhoneNumber($userId, $newPhoneNumber);
                 if ($phone) {
                     $this->session->set_flashdata(['alert' => 'Phone number updated successfully']);
                 } else {
@@ -46,7 +46,7 @@ public function updatePhoneNumber()
         }
 
         // Redirect or load the view for updating phone number
-        $user = $this->userModel->getUser();
+        $user = $this->Usermodel->getUser();
         $this->call->view('user/user-profile', ['user' => $user]);
     }
 
@@ -61,7 +61,7 @@ public function updatePhoneNumber()
 
             if ($this->form_validation->run()) {
                 // Call the model function to update the phone number
-                $address = $this->userModel->updateAddress($userId, $newAddress);
+                $address = $this->Usermodel->updateAddress($userId, $newAddress);
                 if ($address) {
                     $this->session->set_flashdata(['alert' => 'Address updated successfully']);
                 } else {
@@ -73,7 +73,7 @@ public function updatePhoneNumber()
         }
 
         // Redirect or load the view for updating phone number
-        $user = $this->userModel->getUser();
+        $user = $this->Usermodel->getUser();
         $this->call->view('user/user-profile', ['user' => $user]);
     }
 
@@ -88,7 +88,7 @@ public function updatePhoneNumber()
 
             if ($this->form_validation->run()) {
                 // Call the model function to update the phone number
-                $username = $this->userModel->updateUsername($userId, $newUsername);
+                $username = $this->Usermodel->updateUsername($userId, $newUsername);
                 if ($username) {
                     $this->session->set_flashdata(['alert' => 'Username updated successfully']);
                 } else {
@@ -100,7 +100,7 @@ public function updatePhoneNumber()
         }
 
         // Redirect or load the view for updating phone number
-        $user = $this->userModel->getUser();
+        $user = $this->Usermodel->getUser();
         $this->call->view('user/user-profile', ['user' => $user]);
     }
 
@@ -115,7 +115,7 @@ public function updatePhoneNumber()
 
             if ($this->form_validation->run()) {
                 // Call the model function to update the phone number
-                $gender = $this->userModel->updateGender($userId, $newGender);
+                $gender = $this->Usermodel->updateGender($userId, $newGender);
                 if ($gender) {
                     $this->session->set_flashdata(['alert' => 'Gender updated successfully']);
                 } else {
@@ -127,7 +127,7 @@ public function updatePhoneNumber()
         }
 
         // Redirect or load the view for updating phone number
-        $user = $this->userModel->getUser();
+        $user = $this->Usermodel->getUser();
         $this->call->view('user/user-profile', ['user' => $user]);
     }
 
@@ -145,7 +145,7 @@ public function updatePhoneNumber()
 
             if ($this->form_validation->run()) {
                 // Call the model function to update the phone number
-                $name = $this->userModel->updateName($userId, $newFirst, $newLast);
+                $name = $this->Usermodel->updateName($userId, $newFirst, $newLast);
                 if ($name) {
                     $this->session->set_flashdata(['alert' => 'Name updated successfully']);
                 } else {
@@ -157,7 +157,7 @@ public function updatePhoneNumber()
         }
 
         // Redirect or load the view for updating phone number
-        $user = $this->userModel->getUser();
+        $user = $this->Usermodel->getUser();
         $this->call->view('user/user-profile', ['user' => $user]);
     }
 
@@ -172,7 +172,7 @@ public function updatePhoneNumber()
 
             if ($this->form_validation->run()) {
                 // Call the model function to update the phone number
-                $dob = $this->userModel->updateBDAY($userId, $newBDAY);
+                $dob = $this->Usermodel->updateBDAY($userId, $newBDAY);
                 if ($dob) {
                     $this->session->set_flashdata(['alert' => 'B-day updated successfully']);
                 } else {
@@ -184,7 +184,7 @@ public function updatePhoneNumber()
         }
 
         // Redirect or load the view for updating phone number
-        $user = $this->userModel->getUser();
+        $user = $this->Usermodel->getUser();
         $this->call->view('user/user-profile', ['user' => $user]);
     }
 
@@ -199,7 +199,7 @@ public function updatePhoneNumber()
 
             if ($this->form_validation->run()) {
                 // Call the model function to update the phone number
-                $role = $this->userModel->updateRole($userId, $newRole);
+                $role = $this->Usermodel->updateRole($userId, $newRole);
                 if ($role) {
                     $this->session->set_flashdata(['alert' => 'Role updated successfully']);
                 } else {
@@ -211,7 +211,7 @@ public function updatePhoneNumber()
         }
 
         // Redirect or load the view for updating phone number
-        $user = $this->userModel->getUser();
+        $user = $this->Usermodel->getUser();
         $this->call->view('user/user-profile', ['user' => $user]);
     }
 
@@ -232,10 +232,10 @@ public function updatePhoneNumber()
     
             if ($this->form_validation->run()) {
                 // Verify current password
-                $user = $this->userModel->getUserById($userId);
+                $user = $this->Usermodel->getUserById($userId);
                 if (password_verify($currentPassword, $user['password'])) {
                     // Update the password
-                    $this->userModel->updatePassword($userId, $newPassword);
+                    $this->Usermodel->updatePassword($userId, $newPassword);
                     set_flash_alert('success', 'Password updated successfully.');
                 } else {
                     set_flash_alert('danger', 'Current password is incorrect.');
@@ -246,7 +246,7 @@ public function updatePhoneNumber()
         }
     
         // Redirect or load the view for updating password
-        $user = $this->userModel->getUser();
+        $user = $this->Usermodel->getUser();
         $this->call->view('user/user-profile', ['user' => $user]);
     }
     public function verifyPassword() {
@@ -255,7 +255,7 @@ public function updatePhoneNumber()
             $currentPassword = $this->io->post('current_password');
     
             // Verify current password
-            $user = $this->userModel->getUserById($userId);
+            $user = $this->Usermodel->getUserById($userId);
             if (password_verify($currentPassword, $user['password'])) {
                 echo 'verified';
             } else {
