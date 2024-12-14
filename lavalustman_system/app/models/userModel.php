@@ -1,7 +1,7 @@
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
-class userModel extends Model {
+class Usermodel extends Model {
 public function passwordhash($new) {
 	$options = array('cost' => 4,);
 	return password_hash($new, PASSWORD_BCRYPT, $options);
