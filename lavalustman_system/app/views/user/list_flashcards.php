@@ -17,7 +17,7 @@
                                 <?php if (!empty($flashcards)): ?>
                                     <div class="list-group">
                                         <?php foreach ($flashcards as $flashcard): 
-                                            $stats = $this->flashcardsModel->get_quiz_statistics($flashcard['id']);
+                                            $stats = $this->flashcardsmodel->get_quiz_statistics($flashcard['id']);
                                         ?>
                                             <div class="list-group-item list-group-item-action mb-2">
                                                 <div class="d-flex w-100 justify-content-between align-items-center">

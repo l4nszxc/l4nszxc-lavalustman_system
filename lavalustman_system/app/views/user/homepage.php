@@ -78,8 +78,8 @@
                                 <?php if (isset($posted_flashcards) && !empty($posted_flashcards)): ?>
                                     <div class="row">
                                     <?php foreach ($posted_flashcards as $flashcard): 
-    $completed = $this->flashcardsModel->has_user_completed(get_user_id(), $flashcard['id']);
-    $best_score = $completed ? $this->flashcardsModel->get_user_best_score(get_user_id(), $flashcard['id']) : null;
+    $completed = $this->flashcardsmodel->has_user_completed(get_user_id(), $flashcard['id']);
+    $best_score = $completed ? $this->flashcardsmodel->get_user_best_score(get_user_id(), $flashcard['id']) : null;
 ?>
     <div class="col-md-6 col-lg-4">
         <a href="<?= site_url('flashcards/show/'.$flashcard['id']) ?>" class="text-decoration-none">

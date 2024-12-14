@@ -92,7 +92,7 @@ $autoload['helpers'] = array('url', 'common', 'security');
 |
 |	$autoload['models'] = array('model1_model', 'model2_model')
 */
-$autoload['models'] = array('FlashcardsModel');
+$autoload['models'] = array('Flashcardsmodel');
 
 /*
 | -------------------------------------------------------------------

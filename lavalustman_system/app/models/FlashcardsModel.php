@@ -1,7 +1,7 @@
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
-class FlashcardsModel extends Model {
+class Flashcardsmodel extends Model {
     public function create_flashcard($data) {
         $this->db->table('flashcards')->insert($data);
         return $this->db->last_id();

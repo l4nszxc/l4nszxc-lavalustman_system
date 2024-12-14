@@ -4,8 +4,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 class FlashcardsController extends Controller {
     public function __construct() {
         parent::__construct();
-        $this->call ->model('flashcardsModel');
-    }
+        $this->flashcardsmodel = new flashcardsmodel();    }
     
 
     public function create() {
@@ -17,7 +16,7 @@ class FlashcardsController extends Controller {
                 'status' => 'draft'
             ];
             
-            $this->flashcardsModel->create_flashcard($data);
+            $this->flashcardsmodel->create_flashcard($data);
             redirect('flashcards/list');
         } else {
             include APP_DIR . 'views/user/create_flashcards.php';
@@ -26,13 +25,13 @@ class FlashcardsController extends Controller {
 
     public function list() {
         $user_id = get_user_id();
-        $flashcards = $this->flashcardsModel->get_flashcards_by_user($user_id);
+        $flashcards = $this->flashcardsmodel->get_flashcards_by_user($user_id);
         include APP_DIR . 'views/user/list_flashcards.php';
     }
 
     public function edit($id) {
-        $flashcard = $this->flashcardsModel->get_flashcard($id);
-        $items = $this->flashcardsModel->get_flashcard_items($id);
+        $flashcard = $this->flashcardsmodel->get_flashcard($id);
+        $items = $this->flashcardsmodel->get_flashcard_items($id);
         include APP_DIR . 'views/user/edit_flashcard.php';
     }
     
@@ -51,10 +50,10 @@ class FlashcardsController extends Controller {
                 'title' => $_POST['title']
             ];
             
-            $this->flashcardsModel->update_flashcard($id, $data);
+            $this->flashcardsmodel->update_flashcard($id, $data);
             
             // Delete existing items
-            $this->flashcardsModel->delete_flashcard_items($id);
+            $this->flashcardsmodel->delete_flashcard_items($id);
             
             // Add new items if questions exist
             if (isset($_POST['questions']) && is_array($_POST['questions'])) {
@@ -65,7 +64,7 @@ class FlashcardsController extends Controller {
                             'question' => $question,
                             'answer' => $_POST['answers'][$key]
                         ];
-                        $this->flashcardsModel->add_flashcard_item($item_data);
+                        $this->flashcardsmodel->add_flashcard_item($item_data);
                     }
                 }
             }
@@ -77,21 +76,21 @@ class FlashcardsController extends Controller {
     }
 
     public function post($id) {
-        $this->flashcardsModel->update_status($id, 'posted');
+        $this->flashcardsmodel->update_status($id, 'posted');
         redirect('flashcards/list');
     }
     public function delete($id) {
-        $this->flashcardsModel->delete_flashcard($id);
+        $this->flashcardsmodel->delete_flashcard($id);
         redirect('flashcards/list');
     }
     public function unpost($id) {
-        $this->flashcardsModel->update_status($id, 'draft');
+        $this->flashcardsmodel->update_status($id, 'draft');
         redirect('flashcards/list');
     }
     public function show($id) {
         error_log("FlashcardsController::show called with ID: $id");
-        $flashcard = $this->flashcardsModel->get_flashcard($id);
-        $items = $this->flashcardsModel->get_flashcard_items($id);
+        $flashcard = $this->flashcardsmodel->get_flashcard($id);
+        $items = $this->flashcardsmodel->get_flashcard_items($id);
         error_log("Flashcard: " . print_r($flashcard, true));
         error_log("Items: " . print_r($items, true));
         include APP_DIR . 'views/user/view_flashcard.php';
@@ -105,7 +104,7 @@ class FlashcardsController extends Controller {
                 'total_questions' => $_POST['total_questions']
             ];
             
-            $this->flashcardsModel->save_quiz_result($data);
+            $this->flashcardsmodel->save_quiz_result($data);
             echo json_encode(['success' => true]);
         }
     }
