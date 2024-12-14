@@ -132,6 +132,26 @@
             font-weight: 500;
             text-transform: uppercase;
         }
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            border: none;
+            background: none;
+            color: #1e3c72;
+            cursor: pointer;
+            padding: 20px;
+            transition: color 0.3s ease;
+        }
+    .password-toggle:hover {
+        color: #2a5298;
+        
+    }
+    .password-toggle:focus {
+    outline: none;
+}
     </style>
 </head>
 <body>
@@ -159,13 +179,19 @@
                     <input id="email" type="email" class="form-control" name="email" placeholder="Email Address" required>
                 </div>
                 <div class="input-group">
-                    <i class="bi bi-lock"></i>
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
-                </div>
-                <div class="input-group">
-                    <i class="bi bi-lock-fill"></i>
-                    <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required>
-                </div>
+                        <i class="bi bi-lock"></i>
+                        <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                    <div class="input-group">
+                        <i class="bi bi-lock-fill"></i>
+                        <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('password_confirmation')">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
                 <button type="submit" class="btn btn-primary w-100">
                     <i class="bi bi-person-plus me-2"></i>Create Account
                 </button>
@@ -226,6 +252,20 @@
                 })
             }
         })
+        function togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const icon = event.currentTarget.querySelector('i');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+    }
+}
     </script>
 </body>
 </html>

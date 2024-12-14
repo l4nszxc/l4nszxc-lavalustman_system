@@ -161,6 +161,27 @@
             font-weight: 500;
             text-transform: uppercase;
         }
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            border: none;
+            background: none;
+            color: #1e3c72;
+            cursor: pointer;
+            padding: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #2a5298;
+        }
+
+        .password-toggle:focus {
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -191,7 +212,10 @@
                 <div class="input-group">
                     <i class="bi bi-lock"></i>
                     <input id="password" type="password" class="form-control" 
-                           name="password" placeholder="Password" minlength="8" required>
+                        name="password" placeholder="Password" minlength="8" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                        <i class="bi bi-eye"></i>
+                    </button>
                 </div>
                 <div class="forgot-password">
                     <a href="<?=site_url('auth/password-reset');?>">Forgot Password?</a>
@@ -232,6 +256,20 @@
                 })
             }
         })
+        function togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const icon = event.currentTarget.querySelector('i');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+    }
+}
     </script>
 </body>
 </html>
