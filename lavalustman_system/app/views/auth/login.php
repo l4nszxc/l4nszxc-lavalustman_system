@@ -3,67 +3,163 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>  
+    <title>Login - Gayoso Dental Clinic</title>  
     <link rel="icon" type="image/png" href="<?=base_url();?>public/img/favicon.ico"/>
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <!-- Styles -->
-    <link href="<?=base_url();?>public/css/main.css" rel="stylesheet">
-    <link href="<?=base_url();?>public/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
     <style>
         body {
-            background: linear-gradient(to right, #001f3f, #003366);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #1e3c72);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
-            font-family: 'Nunito', sans-serif;
         }
         .card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            padding: 2.5rem;
             width: 100%;
-            max-width: 400px;
-            padding: 2rem;
+            max-width: 450px;
+            transition: all 0.3s ease;
         }
         .card-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .form-control {
-            width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.25rem;
-        }
-        .btn-primary {
-            background-color: #3282b8;
-            color: white;
-            padding: 0.75rem;
+            background: none;
             border: none;
-            border-radius: 0.25rem;
-            width: 100%;
-            cursor: pointer;
+            text-align: center;
+            padding: 0 0 0rem 0;
         }
-        .btn-primary:hover {
-            background-color: #0f4c75;
-        }
-        .btn-outline {
-            background-color: white;
-            color: #3282b8;
-            border: 1px solid #3282b8;
+        .card-header h2 {
+            color: #1e3c72;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
         .btn-group {
             display: flex;
+            gap: 1rem;
             justify-content: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
-        .btn-group .btn {
+        .btn-outline {
+            color: #1e3c72;
+            border: 2px solid #1e3c72;
+            background: transparent;
+            padding: 0.5rem 2rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover {
+            background: rgba(30, 60, 114, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border: none;
+            padding: 0.5rem 2rem;
+            border-radius: 8px;
+            color: white;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4);
+        }
+        .input-group {
+        position: relative;
+        margin-bottom: 2rem;  /* Increased margin to accommodate error message */
+        }
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1e3c72;
+            z-index: 2;  /* Reduced z-index */
+        }
+        .form-control {
+            position: relative;
+            z-index: 1;  /* Base z-index */
+            border-radius: 10px;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 2px solid #e9ecef;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .form-control:focus {
+            border-color: #1e3c72;
+            box-shadow: 0 0 0 0.2rem rgba(30, 60, 114, 0.15);
+        }
+        .forgot-password {
+            text-align: right;
+            margin: 0.5rem 0 1.5rem;
+        }
+        .forgot-password a {
+            color: #1e3c72;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .forgot-password a:hover {
+            color: #2a5298;
+        }
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #6c757d;
+        }
+        .signup-link a {
+            color: #1e3c72;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .signup-link a:hover {
+            color: #2a5298;
+        }
+        .invalid-feedback {
+            position: absolute;
+            bottom: -1.5rem;  /* Position below input */
+            left: 0;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            color: #dc3545;
+        }
+        .form-control.error {
+        border-color: #dc3545;
+        }
+        label.error {
+            position: absolute;
+            bottom: -1.5rem;
+            left: 0;
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+        .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 1.5rem 0;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
             flex: 1;
+            border-bottom: 2px solid rgba(30, 60, 114, 0.1);
+        }
+        
+        .divider span {
+            padding: 0 1rem;
+            color: #1e3c72;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -72,38 +168,41 @@
         <div class="card-header">
             <h2>Login Form</h2>
             <div class="btn-group">
-                <button class="btn btn-primary">Login</button>
-                <button class="btn btn-outline" onclick="window.location.href='<?=site_url('auth/register');?>'">Signup</button>
+                <button class="btn btn-primary" onclick="window.location.href='<?=site_url('auth/login');?>'">Login</button>
+                <button class="btn btn-outline" onclick="window.location.href='<?=site_url('auth/register');?>'">Register</button>
+
             </div>
+            <div class="divider">
+            <span>or continue with</span>
+        </div>
         </div>
         <div class="card-body">
             <?php flash_alert(); ?>
             <form id="logForm" method="POST" action="<?=site_url('auth/login');?>">
                 <?php csrf_field(); ?>
-                <div class="form-group">
-                    <?php $LAVA =& lava_instance(); ?>
-                    <input id="email" type="email" class="form-control <?=$LAVA->session->flashdata('is_invalid');?>" name="email" placeholder="Email Address" value="" required autocomplete="email" autofocus>
-                    <span class="invalid-feedback" role="alert">
-                        <strong><?php echo $LAVA->session->flashdata('err_message'); ?></strong>
-                    </span>
+                <div class="input-group">
+                    <i class="bi bi-envelope"></i>
+                    <input id="email" type="email" class="form-control <?php echo isset($_SESSION['is_invalid']) ? $_SESSION['is_invalid'] : ''; ?>" 
+                           name="email" placeholder="Email Address" required autofocus>
+                    <div class="invalid-feedback">
+                        <?php echo isset($_SESSION['err_message']) ? $_SESSION['err_message'] : ''; ?>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" minlength="8" required autocomplete="current-password">
+                <div class="input-group">
+                    <i class="bi bi-lock"></i>
+                    <input id="password" type="password" class="form-control" 
+                           name="password" placeholder="Password" minlength="8" required>
                 </div>
-                <div class="form-group">
-                    <a href="<?=site_url('auth/password-reset');?>" class="text-sm text-blue-600 hover:underline">
-                        Forgot Your Password?
-                    </a>
+                <div class="forgot-password">
+                    <a href="<?=site_url('auth/password-reset');?>">Forgot Password?</a>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                        Login
-                    </button>
-                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                </button>
             </form>
-            <p class="text-center mt-3">
-                Not a member? <a href="<?=site_url('auth/register');?>" class="text-blue-600 hover:underline">Signup now</a>
-            </p>
+            <div class="signup-link">
+                Don't have an account? <a href="<?=site_url('auth/register');?>">Sign up</a>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

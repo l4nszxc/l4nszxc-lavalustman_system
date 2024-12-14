@@ -2,11 +2,9 @@
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 class FlashcardsController extends Controller {
-    private $flashcardsModel;
-
     public function __construct() {
         parent::__construct();
-        $this->flashcardsModel = new FlashcardsModel();
+        $this->call ->model('flashcardsModel');
     }
     
 
